@@ -5,4 +5,36 @@ public class neuralNet {
     //basically ties together the individual neurons
     //higher level class should handle receive output vector and interpret appropriately
     //Goal of this class and the neuron is class is to not be tied to this specific assignment
+    neuron[] net;
+
+    public neuralNet(int numInputs, int numNeurons) {
+        net = new neuron[numNeurons];
+        for (int i=0; i<numNeurons; i++){
+            net[i] = new neuron(numInputs);
+        }
+    }
+
+    public void initWeightViaFile(){
+        //figure this out later lol
+    }
+
+    public void initWeightViaInput(int userChoice){
+        for (neuron i : net){
+            i.createWeights(userChoice);
+        }
+    }
+
+    public int trainNet(double alpha, double theta){
+        boolean converged = false;
+        int numOfEpochs = 0;
+        int testsPerEpoch;
+        //add some file reading stuff for inputs here??
+        while (!converged){
+            for (int i=0; i<testsPerEpoch; i++){
+
+            }
+        }
+
+        return numOfEpochs;
+    }
 }
