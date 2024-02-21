@@ -21,7 +21,7 @@ public class neuron{
         }
     }
 
-    public boolean trainNeuron(int[] inputs, float answer, float alpha, float theta){
+    public boolean trainNeuron(int[] inputs, float answer, double alpha, double theta){
         double neurAns = 0;
         int y;
         boolean noChange = true;
@@ -31,7 +31,7 @@ public class neuron{
         if (neurAns > theta){
             y = 1;
         }
-        else if (neurAns < theta){
+        else if (neurAns < -theta){
             y = -1;
         }
         else {
@@ -45,7 +45,23 @@ public class neuron{
         }
         return noChange;
     }
-    //Need to add a method that calculates and returns the answer (for non training)
 
-    //Need a method to return the weights for storage in a file
+    public int calcAnswer(int[] inputs, double theta){
+        double yin = 0;
+        int y;
+        for (int i=0; i<inputs.length; i++){
+            yin += inputs[i]*weights[i];
+        }
+        if (yin > theta){
+            return 1;
+        }
+        else if (yin < -theta){
+            return -1;
+        }
+        return 0;
+    }
+
+    public double[] getWeights(){
+        return weights;
+    }
 }
