@@ -14,9 +14,6 @@ public class neuralNet {
         }
     }
 
-    public void initWeightViaFile(){
-        //figure this out later lol
-    }
 
     public void initWeightViaInput(int userChoice){
         for (neuron i : net){
