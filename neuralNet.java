@@ -27,7 +27,7 @@ public class neuralNet {
     public int trainNet(double alpha, double theta){
         boolean converged = false;
         int numOfEpochs = 0;
-        int testsPerEpoch;
+        int testsPerEpoch = 1;
         //add some file reading stuff for inputs here??
         while (!converged){
             for (int i=0; i<testsPerEpoch; i++){
