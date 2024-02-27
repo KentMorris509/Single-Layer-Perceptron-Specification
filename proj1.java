@@ -29,17 +29,22 @@ import java.io.File;
             double alpha = scan.nextDouble();
             System.out.println("Enter the threshold theta: ");
             double theta = scan.nextDouble();
+
             System.out.println("Enter the threshold to be used for measuring weight changes: ");
             double weightChangeThreshold = scan.nextDouble();
+
+            int timeToConverge = perceptron.trainNet(alpha, theta, maxEpochs, inOut[2], new File(trainingFile), new File(saveToFile));
+            System.out.println("Training converged after " + timeToConverge +" epochs.");
         }
     }
 
     public static int[] getInputAndOutputSize(String filename){
-        int[] inputOutput = new int[2];
+        int[] inputOutput = new int[3];
         try {
             Scanner fileScan = new Scanner(new File(filename));
             inputOutput[0] = fileScan.nextInt();
             inputOutput[1] = fileScan.nextInt();
+            inputOutput[2] = fileScan.nextInt();
         }
         catch (Exception e){
             System.out.println("File not found. Exiting");

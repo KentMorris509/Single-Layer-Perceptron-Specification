@@ -1,3 +1,6 @@
+import java.io.File;
+import java.util.Scanner;
+
 public class neuralNet {
     //initialize specified number of neurons in this class and create higher level
     //training program.
@@ -6,12 +9,16 @@ public class neuralNet {
     //higher level class should handle receive output vector and interpret appropriately
     //Goal of this class and the neuron is class is to not be tied to this specific assignment
     neuron[] net;
+    int numInputs;
+    int numNeurons;
 
     public neuralNet(int numInputs, int numNeurons) {
         net = new neuron[numNeurons];
         for (int i=0; i<numNeurons; i++){
             net[i] = new neuron(numInputs);
         }
+        this.numInputs = numInputs;
+        this.numNeurons = numNeurons;
     }
 
     public void initWeightViaFile(){
@@ -24,17 +31,64 @@ public class neuralNet {
         }
     }
 
-    public int trainNet(double alpha, double theta){
+    public int trainNet(double alpha, double theta, int maxEpochs, int testsPerEpoch, File training, File saveTo){
         boolean converged = false;
         int numOfEpochs = 0;
-        int testsPerEpoch = 1;
-        //add some file reading stuff for inputs here??
-        while (!converged){
-            for (int i=0; i<testsPerEpoch; i++){
+        Scanner inputScan = null;
+        try {
+            inputScan = new Scanner(training);
+            //jump past the three header integers
+            inputScan.nextInt();
+            inputScan.nextInt();
+            inputScan.nextInt();
+        }
+        catch(Exception e){
+            System.out.println("File not found");
+        }
+        int[] inputs = new int[numInputs];
+        int[] outputs = new int[numNeurons];
 
+        while (!converged || numOfEpochs < maxEpochs){
+            int changePerEpoch = 0;
+            for (int i=0; i<testsPerEpoch; i++){
+                inputs = getInputs(inputScan);
+                outputs = getOutputs(inputScan);
+                int changePerTest = 0;
+                for (int j=0; j<numNeurons; j++){
+                    boolean noChange = net[j].trainNeuron(inputs, outputs[j], alpha, theta);
+                    if(!noChange){
+                        changePerTest++;
+                    }
+                }
+                if(changePerTest > 0){
+                    changePerEpoch++;
+                }
             }
+            if(changePerEpoch == 0){
+                converged = true;
+            }
+            numOfEpochs++;
         }
 
         return numOfEpochs;
+    }
+    public int[] getInputs(Scanner inputFile){
+        int[] inputs = new int[numInputs];
+        for (int i=0; i<numInputs; i++){
+            inputs[i] = inputFile.nextInt();
+        }
+        return inputs;
+    }
+
+    public int[] getOutputs(Scanner inputFile){
+        int[] outputs = new int[numNeurons];
+        for (int i=0; i<numNeurons; i++){
+            outputs[i] = inputFile.nextInt();
+        }
+        return outputs;
+    }
+
+    public neuron[] getNet(){
+        return net;
     }
 }
