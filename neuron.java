@@ -37,6 +37,7 @@ public class neuron{
         else {
             y = 0;
         }
+        //TODO: account for very similar value/imperfect convergence
         if (y != answer){
             noChange = false;
             for (int i=0; i<inputs.length; i++){
