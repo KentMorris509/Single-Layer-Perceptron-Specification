@@ -14,6 +14,7 @@ import java.io.File;
         if (userChoice == 1){
             System.out.println("Enter the training data file name: ");
             String trainingFile = scan.next();
+            System.out.println(trainingFile);
             int[] inOut = getInputAndOutputSize(trainingFile);
             neuralNet perceptron = new neuralNet(inOut[0], inOut[1]);
 
