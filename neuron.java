@@ -2,6 +2,7 @@ import java.util.Random;
 
 public class neuron{
     double[] weights;
+    private final double weight_threshold = 0.0001;
     
     public neuron(int numInputs){
         weights = new double[numInputs];
@@ -37,8 +38,8 @@ public class neuron{
         else {
             y = 0;
         }
-        //TODO: account for very similar value/imperfect convergence
-        if (y != answer){
+        //account for very similar value/imperfect convergence
+        if (Math.abs(y-answer) > weight_threshold){
             noChange = false;
             for (int i=0; i<inputs.length; i++){
                 weights[i] = weights[i] + answer*inputs[i]*alpha;
