@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.io.File;
+import java.io.*;
  class proj1{
 
     public static void main(String[] args){
@@ -42,10 +43,10 @@ import java.io.File;
     public static int[] getInputAndOutputSize(String filename){
         int[] inputOutput = new int[3];
         try {
-            Scanner fileScan = new Scanner(new File(filename));
-            inputOutput[0] = fileScan.nextInt();
-            inputOutput[1] = fileScan.nextInt();
-            inputOutput[2] = fileScan.nextInt();
+            BufferedReader fileScan = new BufferedReader(new FileReader(filename));
+            inputOutput[0] = Integer.parseInt(fileScan.readLine());
+            inputOutput[1] = Integer.parseInt(fileScan.readLine());
+            inputOutput[2] = Integer.parseInt(fileScan.readLine());
         }
         catch (Exception e){
             System.out.println("File not found. Exiting");

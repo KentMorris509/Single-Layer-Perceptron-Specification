@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class neuralNet {
@@ -53,6 +54,7 @@ public class neuralNet {
             for (int i=0; i<testsPerEpoch; i++){
                 inputs = getInputs(inputScan);
                 outputs = getOutputs(inputScan);
+                System.out.println(Arrays.toString(outputs));
                 int changePerTest = 0;
                 for (int j=0; j<numNeurons; j++){
                     boolean noChange = net[j].trainNeuron(inputs, outputs[j], alpha, theta);
@@ -68,6 +70,15 @@ public class neuralNet {
                 converged = true;
             }
             numOfEpochs++;
+            try {
+                inputScan = new Scanner(training);
+                inputScan.nextInt();
+                inputScan.nextInt();
+                inputScan.nextInt();
+            }
+            catch(Exception e) {
+                System.out.println(e);
+            }
         }
 
         return numOfEpochs;
@@ -85,6 +96,7 @@ public class neuralNet {
         for (int i=0; i<numNeurons; i++){
             outputs[i] = inputFile.nextInt();
         }
+        String b = inputFile.next();
         return outputs;
     }
 
