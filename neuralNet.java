@@ -1,6 +1,7 @@
 import java.io.File;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.io.FileWriter;
 
 public class neuralNet {
     //initialize specified number of neurons in this class and create higher level
@@ -75,6 +76,26 @@ public class neuralNet {
                 inputScan.nextInt();
                 inputScan.nextInt();
                 inputScan.nextInt();
+            }
+            catch(Exception e) {
+                System.out.println(e);
+            }
+            try{
+                FileWriter outputScan = new FileWriter(saveTo);
+                for (int n = 0; n < numNeurons; n++){
+                    double[] weight_vector = net[n].getWeights();
+                    int len = weight_vector.length;
+                    for (int w = 0; w < len; w++){
+                        if ((w+1)%7 == 0 && w != 0){
+                            outputScan.write(Double.toString(weight_vector[w])+"\n");
+                        }
+                        else{
+                            outputScan.write(Double.toString(weight_vector[w])+", ");
+                        }
+                    }
+                    outputScan.write("\n\n");
+                }
+                outputScan.close();
             }
             catch(Exception e) {
                 System.out.println(e);
