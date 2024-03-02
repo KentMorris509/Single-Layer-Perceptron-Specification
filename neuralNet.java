@@ -13,10 +13,10 @@ public class neuralNet {
     int numInputs;
     int numNeurons;
 
-    public neuralNet(int numInputs, int numNeurons) {
+    public neuralNet(int numInputs, int numNeurons, double weight_threshold) {
         net = new neuron[numNeurons];
         for (int i=0; i<numNeurons; i++){
-            net[i] = new neuron(numInputs);
+            net[i] = new neuron(numInputs, weight_threshold);
         }
         this.numInputs = numInputs;
         this.numNeurons = numNeurons;

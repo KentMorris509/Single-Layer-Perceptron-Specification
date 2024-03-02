@@ -17,11 +17,9 @@ import java.io.*;
             String trainingFile = scan.next();
             System.out.println(trainingFile);
             int[] inOut = getInputAndOutputSize(trainingFile);
-            neuralNet perceptron = new neuralNet(inOut[0], inOut[1]);
 
             System.out.println("Enter 0 for initial weights = 0. Enter 1 to randomize weights: ");
             int weightChoice = scan.nextInt();
-            perceptron.initWeightViaInput(weightChoice);
 
             System.out.println("Enter the maximum number of epochs: ");
             int maxEpochs = scan.nextInt();
@@ -31,9 +29,12 @@ import java.io.*;
             double alpha = scan.nextDouble();
             System.out.println("Enter the threshold theta: ");
             double theta = scan.nextDouble();
+            
 
             System.out.println("Enter the threshold to be used for measuring weight changes: ");
             double weightChangeThreshold = scan.nextDouble();
+            neuralNet perceptron = new neuralNet(inOut[0], inOut[1], weightChangeThreshold);
+            perceptron.initWeightViaInput(weightChoice);
 
             int timeToConverge = perceptron.trainNet(alpha, theta, maxEpochs, inOut[2], new File(trainingFile), new File(saveToFile));
             System.out.println("Training converged after " + timeToConverge +" epochs.");

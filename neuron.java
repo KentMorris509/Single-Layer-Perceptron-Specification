@@ -2,10 +2,11 @@ import java.util.Random;
 
 public class neuron{
     double[] weights;
-    private final double weight_threshold = 0.0001;
+    private final double weight_threshold;
     
-    public neuron(int numInputs){
+    public neuron(int numInputs, double wt){
         weights = new double[numInputs];
+        weight_threshold = wt;
     }
 
     public void createWeights(int userChoice){
