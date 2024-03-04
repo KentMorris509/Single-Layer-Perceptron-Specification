@@ -50,12 +50,12 @@ public class neuralNet {
         int[] inputs = new int[numInputs];
         int[] outputs = new int[numNeurons];
 
-        while (!converged || numOfEpochs < maxEpochs){
+        while (!converged && numOfEpochs < maxEpochs){
             int changePerEpoch = 0;
             for (int i=0; i<testsPerEpoch; i++){
                 inputs = getInputs(inputScan);
                 outputs = getOutputs(inputScan);
-                System.out.println(Arrays.toString(outputs));
+
                 int changePerTest = 0;
                 for (int j=0; j<numNeurons; j++){
                     boolean noChange = net[j].trainNeuron(inputs, outputs[j], alpha, theta);
