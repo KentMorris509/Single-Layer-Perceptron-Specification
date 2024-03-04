@@ -40,10 +40,12 @@ public class neuron{
             y = 0;
         }
         //account for very similar value/imperfect convergence
-        if (Math.abs(y-answer) > weight_threshold){
-            noChange = false;
-            for (int i=0; i<inputs.length; i++){
-                weights[i] = weights[i] + answer*inputs[i]*alpha;
+        if (y != answer){
+            for (int i = 0; i < inputs.length; i++) {
+                if (answer*inputs[i]*alpha > weight_threshold) {
+                    noChange = false;
+                    weights[i] = weights[i] + answer * inputs[i] * alpha;
+                }
             }
         }
         return noChange;
