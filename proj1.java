@@ -39,6 +39,17 @@ import java.io.*;
             int timeToConverge = perceptron.trainNet(alpha, theta, maxEpochs, inOut[2], new File(trainingFile), new File(saveToFile));
             System.out.println("Training converged after " + timeToConverge +" epochs.");
         }
+        else if (userChoice == 2){
+            //assign weights based on the specified file
+        }
+        System.out.println("Enter 1 to test using a testing data file, enter 2 to quit: ");
+        userChoice = scan.nextInt();
+        if (userChoice == 1){
+            //implement testing call here
+        }
+        else {
+            System.exit(0);
+        }
     }
 
     public static int[] getInputAndOutputSize(String filename){
