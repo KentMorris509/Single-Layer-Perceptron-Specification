@@ -124,4 +124,23 @@ public class neuralNet {
     public neuron[] getNet(){
         return net;
     }
+
+    public int[] testNet(File testFile, double theta){
+            Scanner testScan;
+        try{
+            testScan = new Scanner(testFile);
+            int[] inputs = new int[numInputs];
+            inputs = getInputs(testScan);
+            int[] answerVector = new int[numNeurons];
+            for (int j=0; j<numNeurons; j++){
+                answerVector[j] = net[j].calcAnswer(inputs, theta);
+            }
+            return answerVector;
+        }
+        catch(Exception e) {
+                System.out.println(e);
+            }
+        return null;
+    }
+
 }
