@@ -3,6 +3,7 @@ import java.io.*;
  class proj1{
 
     public static void main(String[] args){
+        neuralNet perceptron = new neuralNet(0,0,0);
         Scanner scan = new Scanner(System.in);
         System.out.println("Welcome to my Perceptron neural net!");
         System.out.println("\nEnter 1 to train using a training data file\nEnter 2 to use pretrained weights");
@@ -32,7 +33,7 @@ import java.io.*;
 
             System.out.println("Enter the threshold to be used for measuring weight changes: ");
             double weightChangeThreshold = scan.nextDouble();
-            neuralNet perceptron = new neuralNet(inOut[0], inOut[1], weightChangeThreshold);
+            perceptron = new neuralNet(inOut[0], inOut[1], weightChangeThreshold);
             perceptron.initWeightViaInput(weightChoice);
 
             int timeToConverge = perceptron.trainNet(alpha, theta, maxEpochs, inOut[2], new File(trainingFile), new File(saveToFile));
@@ -44,7 +45,7 @@ import java.io.*;
 
 
             int[] headers = getInputAndOutputSize(weightFileData, 2);
-            neuralNet perceptron = new neuralNet(headers[0], headers[1], 0);
+            perceptron = new neuralNet(headers[0], headers[1], 0);
 
             
             perceptron.initWeightViaFile(new File(weightFileData));
@@ -52,7 +53,74 @@ import java.io.*;
         System.out.println("Enter 1 to test using a testing data file, enter 2 to quit: ");
         userChoice = scan.nextInt();
         if (userChoice == 1){
+            
+            try{
+                System.out.println("Enter name of test file: ");
+                String testFileName = scan.next();
+                int[] inOut = getInputAndOutputSize(testFileName, 3);
+                File testFile = new File(testFileName);
+                Scanner testScan = new Scanner(testFile);
 
+                System.out.println("Enter name of the output file: ");
+                String outputFileName = scan.next();
+                File outputFile = new File(outputFileName);
+                FileWriter writer = new FileWriter(outputFile);
+            
+                //skip headers
+                testScan.nextLine();
+                testScan.nextLine();
+                testScan.nextLine();
+                //loop for each whole input
+                for (int i = 0; i < inOut[2]; i++){
+                    
+                    int [] answerVector = perceptron.testNet(testScan);
+                    writer.write("Answer Vector:\n");
+                    for (int c = 0; c < answerVector.length; c++) {
+                        writer.write(Integer.toString(answerVector[c])); // Convert int to string
+                        if (c < answerVector.length - 1) {
+                            writer.write(" ");
+                        }
+                    }
+                    writer.write('\n');
+                    writer.write("Expected Vector:\n");
+                    String line = testScan.nextLine();
+                    String [] correctAnswerVector = line.split(" ");
+                    for (int c = 0; c < correctAnswerVector.length; c++) {
+                        writer.write(correctAnswerVector[c]); 
+                        if (c < correctAnswerVector.length - 1) {
+                            writer.write(" ");
+                        }
+                    }
+                    writer.write('\n');
+                    String answerLetter = testScan.nextLine();
+                    writer.write("Letter being used: " + answerLetter + "\n");
+                    //check for match
+                    boolean match = true;
+                    int positiveOnes = 0;
+                    for (int j = 0; j < answerVector.length; j++){
+                        if (answerVector[j] != Integer.parseInt(correctAnswerVector[j])){
+                            match = false;
+                        }
+                        if (answerVector[j] == 1){
+                            positiveOnes++;
+                        }
+                    }
+                    if (positiveOnes != 1){
+                        writer.write("Undecided answer\n\n");
+                    }
+                    else if (match == false){
+                        writer.write("Did not recognize character properly\n\n");
+                    }
+                    else{
+                        writer.write("Character recognized\n\n");
+                    }
+                    
+                }
+            }
+            catch (Exception e){
+                System.out.println(e);
+                System.exit(1);
+            }
             //implement testing call here
         }
         else {

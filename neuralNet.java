@@ -160,10 +160,8 @@ public class neuralNet {
         return net;
     }
 
-    public int[] testNet(File testFile){
-            Scanner testScan;
+    public int[] testNet(Scanner testScan){
         try{
-            testScan = new Scanner(testFile);
             int[] inputs = new int[numInputs];
             inputs = getInputs(testScan);
             int[] answerVector = new int[numNeurons];
