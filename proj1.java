@@ -67,9 +67,9 @@ import java.io.*;
                 FileWriter writer = new FileWriter(outputFile);
             
                 //skip headers
-                testScan.nextLine();
-                testScan.nextLine();
-                testScan.nextLine();
+                testScan.nextInt();
+                int output_len = testScan.nextInt();
+                testScan.nextInt();
                 //loop for each whole input
                 for (int i = 0; i < inOut[2]; i++){
                     
@@ -83,11 +83,12 @@ import java.io.*;
                     }
                     writer.write('\n');
                     writer.write("Expected Vector:\n");
-                    String line = testScan.nextLine();
-                    String [] correctAnswerVector = line.split(" ");
-                    for (int c = 0; c < correctAnswerVector.length; c++) {
-                        writer.write(correctAnswerVector[c]); 
-                        if (c < correctAnswerVector.length - 1) {
+                    //String line = testScan.nextLine();
+                    int [] correctAnswerVector = new int[7];
+                    for (int j = 0; j < output_len; j++){
+                        correctAnswerVector[j] = testScan.nextInt();
+                        writer.write(correctAnswerVector[j]); 
+                        if (j < correctAnswerVector.length - 1) {
                             writer.write(" ");
                         }
                     }
@@ -98,7 +99,7 @@ import java.io.*;
                     boolean match = true;
                     int positiveOnes = 0;
                     for (int j = 0; j < answerVector.length; j++){
-                        if (answerVector[j] != Integer.parseInt(correctAnswerVector[j])){
+                        if (answerVector[j] != correctAnswerVector[j]){
                             match = false;
                         }
                         if (answerVector[j] == 1){
@@ -116,6 +117,8 @@ import java.io.*;
                     }
                     
                 }
+                writer.close();
+                testScan.close();
             }
             catch (Exception e){
                 System.out.println(e);
