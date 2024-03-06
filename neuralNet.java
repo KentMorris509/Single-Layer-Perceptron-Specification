@@ -24,20 +24,24 @@ public class neuralNet {
     }
 
     public void initWeightViaFile(File weightFile){
-        //figure this out later lol
+
         Scanner weightScan;
         try{
             weightScan = new Scanner(weightFile);
+            //jump past the headers of the file
+            weightScan.nextInt();
+            weightScan.nextInt();
+
             weightScan.useDelimiter(",");
-            double[] winput = new double[63];
+            double[] winput = new double[numInputs];
             int curNeuron = 0;
             int curIndexWeight = 0;
             //while(weightScan.hasNextLine()){
                 //String line = weightScan.nextLine();
                 while(weightScan.hasNext()){
-                    if (curIndexWeight == 63){
+                    if (curIndexWeight == numInputs){
                         net[curNeuron].setWeights(winput);
-                        winput = new double[63];
+                        winput = new double[numInputs];
                         curNeuron++;
                         curIndexWeight = 0;
                     }
@@ -46,13 +50,6 @@ public class neuralNet {
                     winput[curIndexWeight] = weight;
                     curIndexWeight++;
                 }
-           // }
-            
-            
-            //for (int j=0; j<numNeurons; j++){
-               // int answerVector[j] = net[j].calcAnswer(winput, theta);
-            //}
-            //return answerVector;
         }
         catch(Exception e) {
                 System.out.println(e);
@@ -114,6 +111,8 @@ public class neuralNet {
             }
             try{
                 FileWriter outputScan = new FileWriter(saveTo);
+                outputScan.write(Integer.toString(numInputs)+"\n");
+                outputScan.write(Integer.toString(numNeurons)+"\n");
                 for (int n = 0; n < numNeurons; n++){
                     double[] weight_vector = net[n].getWeights();
                     int len = weight_vector.length;
@@ -157,7 +156,7 @@ public class neuralNet {
         return net;
     }
 
-    public int[] testNet(File testFile, double theta){
+    public int[] testNet(File testFile){
             Scanner testScan;
         try{
             testScan = new Scanner(testFile);
@@ -165,7 +164,7 @@ public class neuralNet {
             inputs = getInputs(testScan);
             int[] answerVector = new int[numNeurons];
             for (int j=0; j<numNeurons; j++){
-                answerVector[j] = net[j].calcAnswer(inputs, theta);
+                answerVector[j] = net[j].calcAnswer(inputs);
             }
             return answerVector;
         }

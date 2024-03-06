@@ -15,7 +15,7 @@ import java.io.*;
             System.out.println("Enter the training data file name: ");
             String trainingFile = scan.next();
             System.out.println(trainingFile);
-            int[] inOut = getInputAndOutputSize(trainingFile);
+            int[] inOut = getInputAndOutputSize(trainingFile, 3);
 
             System.out.println("Enter 0 for initial weights = 0. Enter 1 to randomize weights: ");
             int weightChoice = scan.nextInt();
@@ -42,9 +42,10 @@ import java.io.*;
             System.out.println("Enter the trained weight settings input data file name:");
             String weightFileData = scan.next();
 
-            //neuralNet
+            int[] headers = getInputAndOutputSize(weightFileData, 2);
+            neuralNet perceptron = new neuralNet(headers[0], headers[1], 0);
             
-            //assign weights based on the specified file 
+            perceptron.initWeightViaFile(new File(weightFileData));
         }
         System.out.println("Enter 1 to test using a testing data file, enter 2 to quit: ");
         userChoice = scan.nextInt();
@@ -57,13 +58,15 @@ import java.io.*;
         }
     }
 
-    public static int[] getInputAndOutputSize(String filename){
+    public static int[] getInputAndOutputSize(String filename, int headerSize){
         int[] inputOutput = new int[3];
         try {
             BufferedReader fileScan = new BufferedReader(new FileReader(filename));
             inputOutput[0] = Integer.parseInt(fileScan.readLine());
             inputOutput[1] = Integer.parseInt(fileScan.readLine());
-            inputOutput[2] = Integer.parseInt(fileScan.readLine());
+            if (headerSize == 3) {
+                inputOutput[2] = Integer.parseInt(fileScan.readLine());
+            }
         }
         catch (Exception e){
             System.out.println("File not found. Exiting");

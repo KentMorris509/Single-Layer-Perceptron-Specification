@@ -51,16 +51,16 @@ public class neuron{
         return noChange;
     }
 
-    public int calcAnswer(int[] inputs, double theta){
+    public int calcAnswer(int[] inputs){
         double yin = 0;
         int y;
         for (int i=0; i<inputs.length; i++){
             yin += inputs[i]*weights[i];
         }
-        if (yin > theta){
+        if (yin >= 0){
             return 1;
         }
-        else if (yin < -theta){
+        else if (yin < 0){
             return -1;
         }
         return 0;
