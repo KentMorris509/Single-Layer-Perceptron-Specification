@@ -93,6 +93,7 @@ import java.io.*;
                         }
                     }
                     writer.write('\n');
+                    testScan.nextLine();
                     String answerLetter = testScan.nextLine();
                     writer.write("Letter being used: " + answerLetter + "\n");
                     //check for match
