@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.io.File;
 import java.io.*;
  class proj1{
 
@@ -40,11 +39,17 @@ import java.io.*;
             System.out.println("Training converged after " + timeToConverge +" epochs.");
         }
         else if (userChoice == 2){
-            //assign weights based on the specified file
+            System.out.println("Enter the trained weight settings input data file name:");
+            String weightFileData = scan.next();
+
+            //neuralNet
+            
+            //assign weights based on the specified file 
         }
         System.out.println("Enter 1 to test using a testing data file, enter 2 to quit: ");
         userChoice = scan.nextInt();
         if (userChoice == 1){
+
             //implement testing call here
         }
         else {
