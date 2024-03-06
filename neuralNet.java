@@ -29,19 +29,25 @@ public class neuralNet {
         try{
             weightScan = new Scanner(weightFile);
             weightScan.useDelimiter(",");
-            double[] winput;
+            double[] winput = new double[63];
             curNeuron = 0;
             curWeight = 0;
             while(weightScan.hasNextLine()){
                 String line = weightScan.nextLine();
                 while(weightScan.hasNext()){
+                    if (curWeight == 63){
+                        net[curNeuron].setWeights(winput);
+                        winput = new double[63];
+                        curNeuron++;
+                        curWeight = 0;
+                    }
                     String token = weightScan.next();
                     double weight = Double.parseDouble(token);
-                    winput[curWeight]
+                    winput[curWeight] = weight;
+                    curWeight++;
                 }
             }
             }
-
             }
             
             for (int j=0; j<numNeurons; j++){
