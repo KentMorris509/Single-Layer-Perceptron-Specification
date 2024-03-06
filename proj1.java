@@ -72,8 +72,8 @@ import java.io.*;
                 testScan.nextInt();
                 //loop for each whole input
                 for (int i = 0; i < inOut[2]; i++){
-                    
-                    int [] answerVector = perceptron.testNet(testScan);
+                    int [] answerVector = new int[7];
+                    answerVector = perceptron.testNet(testScan);
                     writer.write("Answer Vector:\n");
                     for (int c = 0; c < answerVector.length; c++) {
                         writer.write(Integer.toString(answerVector[c])); // Convert int to string
@@ -87,8 +87,8 @@ import java.io.*;
                     int [] correctAnswerVector = new int[7];
                     for (int j = 0; j < output_len; j++){
                         correctAnswerVector[j] = testScan.nextInt();
-                        writer.write(correctAnswerVector[j]); 
-                        if (j < correctAnswerVector.length - 1) {
+                        writer.write(Integer.toString(correctAnswerVector[j])); 
+                        if (j < output_len-1) {
                             writer.write(" ");
                         }
                     }
@@ -122,6 +122,7 @@ import java.io.*;
             }
             catch (Exception e){
                 System.out.println(e);
+                e.printStackTrace();
                 System.exit(1);
             }
             //implement testing call here
