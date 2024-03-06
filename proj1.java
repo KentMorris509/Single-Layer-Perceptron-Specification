@@ -42,8 +42,10 @@ import java.io.*;
             System.out.println("Enter the trained weight settings input data file name:");
             String weightFileData = scan.next();
 
+
             int[] headers = getInputAndOutputSize(weightFileData, 2);
             neuralNet perceptron = new neuralNet(headers[0], headers[1], 0);
+
             
             perceptron.initWeightViaFile(new File(weightFileData));
         }
