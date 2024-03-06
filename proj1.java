@@ -41,8 +41,9 @@ import java.io.*;
         else if (userChoice == 2){
             System.out.println("Enter the trained weight settings input data file name:");
             String weightFileData = scan.next();
-
-            //neuralNet
+            int[] inOut = getInputAndOutputSize(weightFileData);
+            neuralNet perceptron = new neuralNet(inOut[0], inOut[1],inOut[2]);
+            perceptron.initWeightViaFile(new File(weightFileData));
             
             //assign weights based on the specified file 
         }

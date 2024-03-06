@@ -13,12 +13,14 @@ public class neuralNet {
     neuron[] net;
     int numInputs;
     int numNeurons;
+    double weight_threshold;
 
     public neuralNet(int numInputs, int numNeurons, double weight_threshold) {
         net = new neuron[numNeurons];
         for (int i=0; i<numNeurons; i++){
             net[i] = new neuron(numInputs, weight_threshold);
         }
+        this.weight_threshold = weight_threshold;
         this.numInputs = numInputs;
         this.numNeurons = numNeurons;
     }
@@ -44,6 +46,7 @@ public class neuralNet {
                     String token = weightScan.next();
                     double weight = Double.parseDouble(token);
                     winput[curIndexWeight] = weight;
+                    System.out.println(winput[curIndexWeight]);
                     curIndexWeight++;
                 }
            // }
@@ -114,6 +117,10 @@ public class neuralNet {
             }
             try{
                 FileWriter outputScan = new FileWriter(saveTo);
+                outputScan.write(Integer.toString(numInputs)+ "\n");
+                outputScan.write(Integer.toString(numNeurons)+ "\n");
+                outputScan.write("0" + "\n"); 
+                
                 for (int n = 0; n < numNeurons; n++){
                     double[] weight_vector = net[n].getWeights();
                     int len = weight_vector.length;
