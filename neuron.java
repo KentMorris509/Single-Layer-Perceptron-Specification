@@ -69,4 +69,9 @@ public class neuron{
     public double[] getWeights(){
         return weights;
     }
+
+    public void setWeights(double[] winput){
+        weights = winput;
+    }
+
 }

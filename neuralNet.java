@@ -23,8 +23,35 @@ public class neuralNet {
         this.numNeurons = numNeurons;
     }
 
-    public void initWeightViaFile(){
+    public void initWeightViaFile(File weightFile){
         //figure this out later lol
+        Scanner weightScan;
+        try{
+            weightScan = new Scanner(weightFile);
+            weightScan.useDelimiter(",");
+            double[] winput;
+            curNeuron = 0;
+            curWeight = 0;
+            while(weightScan.hasNextLine()){
+                String line = weightScan.nextLine();
+                while(weightScan.hasNext()){
+                    String token = weightScan.next();
+                    double weight = Double.parseDouble(token);
+                    winput[curWeight]
+                }
+            }
+            }
+
+            }
+            
+            for (int j=0; j<numNeurons; j++){
+                answerVector[j] = net[j].calcAnswer(inputs, theta);
+            }
+            return answerVector;
+        }
+        catch(Exception e) {
+                System.out.println(e);
+            }
     }
 
     public void initWeightViaInput(int userChoice){
