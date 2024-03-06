@@ -38,21 +38,30 @@ public class neuralNet {
             double[] winput = new double[numInputs];
             int curNeuron = 0;
             int curIndexWeight = 0;
-            //while(weightScan.hasNextLine()){
-                //String line = weightScan.nextLine();
-                while(weightScan.hasNext()){
-                    if (curIndexWeight == numInputs){
-                        net[curNeuron].setWeights(winput);
-                        winput = new double[numInputs];
-                        curNeuron++;
-                        curIndexWeight = 0;
+            while (weightScan.hasNext()) {
+                String token = weightScan.next().trim();  // Trim to handle leading/trailing whitespaces
+                
+                if (!token.isEmpty()) {
+                    // Split the token using both commas and spaces as delimiters
+                    String[] values = token.split("[,\\s]+");
+            
+                    // Convert each part into a double
+                    for (String value : values) {
+                        double weight = Double.parseDouble(value);
+                        winput[curIndexWeight] = weight;
+                        System.out.println(winput[curIndexWeight]);
+                        curIndexWeight++;
+            
+                        // Check if you've reached the maximum number of inputs
+                        if (curIndexWeight == numInputs) {
+                            net[curNeuron].setWeights(winput);
+                            winput = new double[numInputs];
+                            curNeuron++;
+                            curIndexWeight = 0;
+                        }
                     }
-                    String token = weightScan.next();
-                    double weight = Double.parseDouble(token);
-                    winput[curIndexWeight] = weight;
-                    System.out.println(winput[curIndexWeight]);
-                    curIndexWeight++;
                 }
+            }
         }
         catch(Exception e) {
                 System.out.println(e);
