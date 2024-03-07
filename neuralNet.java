@@ -49,7 +49,7 @@ public class neuralNet {
                     for (String value : values) {
                         double weight = Double.parseDouble(value);
                         winput[curIndexWeight] = weight;
-                        System.out.println(winput[curIndexWeight]);
+                        //System.out.println(winput[curIndexWeight]);
                         curIndexWeight++;
             
                         // Check if you've reached the maximum number of inputs
