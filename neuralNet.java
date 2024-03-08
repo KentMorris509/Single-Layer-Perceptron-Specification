@@ -135,7 +135,7 @@ public class neuralNet {
                     double[] weight_vector = net[n].getWeights();
                     int len = weight_vector.length;
                     for (int w = 0; w < len; w++){
-                        if ((w+1)%7 == 0 && w != 0){
+                        if ((w+1)%numNeurons == 0 && w != 0){
                             outputScan.write(Double.toString(weight_vector[w])+"\n");
                         }
                         else{

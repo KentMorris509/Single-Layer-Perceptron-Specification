@@ -79,7 +79,7 @@ import java.io.*;
                     testScan.nextInt();
                     //loop for each whole input
                     for (int i = 0; i < inOut[2]; i++){
-                        int [] answerVector = new int[7];
+                        int [] answerVector = new int[inOut[1]];
                         answerVector = perceptron.testNet(testScan);
                         writer.write("Answer Vector:\n");
                         for (int c = 0; c < answerVector.length; c++) {
@@ -91,7 +91,7 @@ import java.io.*;
                         writer.write('\n');
                         writer.write("Expected Vector:\n");
                         //String line = testScan.nextLine();
-                        int [] correctAnswerVector = new int[7];
+                        int [] correctAnswerVector = new int[inOut[1]];
                         for (int j = 0; j < output_len; j++){
                             correctAnswerVector[j] = testScan.nextInt();
                             writer.write(Integer.toString(correctAnswerVector[j])); 
