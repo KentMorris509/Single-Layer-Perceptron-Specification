@@ -1,5 +1,11 @@
+/*
+ * Authors: Daniel Daugbjerg, Kent Morris, Casey Klutznick, Thomas McKeown
+ * Date Last Modified: 3/7/24
+ * Description: Main java file used for getting user input in order to interact with the perceptron
+ */
 import java.util.Scanner;
 import java.io.*;
+
  class proj1{
 
     public static void main(String[] args){

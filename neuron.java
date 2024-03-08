@@ -1,3 +1,8 @@
+/*
+ * Authors: Daniel Daugbjerg, Kent Morris, Casey Klutznick, Thomas McKeown
+ * Date Last Modified: 3/7/24
+ * Description: Neuron class that handles weights and training
+ */
 import java.util.Random;
 
 public class neuron{

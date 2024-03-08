@@ -1,3 +1,8 @@
+/*
+ * Authors: Daniel Daugbjerg, Kent Morris, Casey Klutznick, Thomas McKeown
+ * Date Last Modified: 3/7/24
+ * Description: Neural net class the creates array of neurons as the net and operates as collective
+ */
 import java.io.File;
 import java.util.Arrays;
 import java.util.Scanner;
